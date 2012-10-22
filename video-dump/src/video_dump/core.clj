@@ -35,6 +35,8 @@
 
 (defn -main [& args]
   (let [[per-page total-pages] args]
-    (map #(doall (map persist-video-data
-                      (get-videos {:page (inc %) :per_page per-page})))
-         (range (Integer. total-pages)))))
+    (if (string? per-page)
+      (println (apply str (interpose " " (normalize-str per-page))))
+      (map #(doall (map persist-video-data
+                        (get-videos {:page (inc %) :per_page per-page})))
+           (range (Integer. total-pages))))))
