@@ -8,7 +8,7 @@ def insert(term, tags):
     redis = redis_handler()
     total = 0
     for tag in tags.iteritems():
-        redis.hset(term, tag[0], tag[1])
+        redis.hset('term:' + term, tag[0], tag[1])
         total += tag[1]
 
     redis.set(term + ":count", total)
@@ -36,7 +36,7 @@ def test_api_should_return_json_with_proportions_of_term():
                      "dancinha": 0.05263157894736842}
 
 def test_api_should_return_json_with_tags_merged():
-    term = "neymar"
+    term = "neym"
     insert(term=term, tags={"santos": 100, "futebol": 80, "dancinha": 10})
 
     term = "gols"
@@ -46,8 +46,8 @@ def test_api_should_return_json_with_tags_merged():
 
     result = api_get_merged_tags(tokenized_text)
 
-    assert result == {"futebol": 1.3684210526315788, "santos":  0.5368421052631579, \
-			            "dancinha": 0.05263157894736842, "fluminense": 0.042105263157894736}
+    assert dict(result) == {"futebol": 1.3684210526315788, "santos":  0.5368421052631579, \
+                "dancinha": 0.05263157894736842, "fluminense": 0.042105263157894736}
 
 
 def test_tokenize_text():

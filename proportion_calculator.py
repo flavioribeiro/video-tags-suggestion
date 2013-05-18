@@ -3,7 +3,7 @@ import redis
 import os
 import operator
 
-REDIS_HOST = "videos3s3.wm.globoi.com"
+REDIS_HOST = "localhost"
 REDIS_PORT = 6379
 
 def redis_handler():
@@ -11,23 +11,23 @@ def redis_handler():
 
 def get_tags(term):
     r = redis_handler()
-    keys = r.hkeys(term)
+    keys = r.hkeys('term:' + term)
     result = {}
 
     for key in keys:
-        result[key] = int(r.hget(term, key))
+        result[key] = int(r.hget('term:' + term, key))
 
     return result
 
 def get_proportion(tag, term):
     r = redis_handler()
     total = int(r.get(term + ":count"))
-    tag_count = r.hget(term, tag)
+    tag_count = r.hget('term:' + term, tag)
 
     return float(tag_count) / total
 
 def api_get_tags(term):
-    term = "term:" + term.lower()
+    term = term.lower()
     tags = get_tags(term)
     result = {}
     for tag in tags:
