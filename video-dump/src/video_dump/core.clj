@@ -4,7 +4,7 @@
   (:import [redis.clients.jedis Jedis])
   (:gen-class))
 
-(def redis (Jedis. "videos3s3.wm.globoi.com"))
+(def redis (Jedis. "localhost"))
 
 (defn get-videos
   ""
