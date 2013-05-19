@@ -39,7 +39,7 @@ def test_api_should_return_json_with_tags_merged():
     term = "neym"
     insert(term=term, tags={"santos": 100, "futebol": 80, "dancinha": 10})
 
-    term = "gols"
+    term = "gol"
     insert(term=term, tags={"futebol": 90, "santos": 1, "fluminense": 4})
 
     tokenized_text = "neymar gols"
@@ -51,4 +51,4 @@ def test_api_should_return_json_with_tags_merged():
 
 
 def test_tokenize_text():
-    assert tokenize_text("anderson silva vence") == "silv venc anderson"
+    assert tokenize_text("anderson silva vence") == "anderson silv venc"

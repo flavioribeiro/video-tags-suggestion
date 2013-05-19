@@ -1,7 +1,11 @@
 #encoding: utf-8
 import redis
-import os
 import operator
+
+from nltk.stem import RSLPStemmer
+
+stemmer = RSLPStemmer()
+
 
 REDIS_HOST = "localhost"
 REDIS_PORT = 6379
@@ -56,6 +60,6 @@ def api_get_merged_tags(text):
     return sorted_list
 
 def tokenize_text(text):
-    s = os.popen('java -jar /tmp/video-dump-1.0.0-SNAPSHOT-standalone.jar "' + str(text) + '"').read()
+    s = ' '.join([stemmer.stem(word) for word in text.split(' ')])
 
     return s.replace('\n', '')
