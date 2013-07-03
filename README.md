@@ -44,9 +44,9 @@ Both steps are done as jobs. The third step is the real interface of the system.
 
 STEP 3
 ------
-### Receive a text (title + description), tokenize/analyse it and use the API above
-###to fetch their most used tags and proportions. Then, all tags fetched are
-###merged into one array of sorted tags and return the 3 heaviest tags.
+Receive a text (title + description), tokenize/analyse it and use the API above
+to fetch their most used tags and proportions. Then, all tags fetched are
+merged into one array of sorted tags and return the 3 heaviest tags.
 
 	- Example: Neymar faz 3 gols
 
